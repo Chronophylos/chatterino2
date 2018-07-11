@@ -54,11 +54,15 @@ MessagePtr Message::createMessage(const QString &text)
 
 namespace {
 
-QString makeDuration(int count, const QString &order)
+QString makeDuration(double count, const QString &order)
 {
     QString text;
 
-    text.append(QString::number(count));
+    if (fabs(count - qRound(count)) < 0.01) {
+        text.append(QString::number(qRound(count)));
+    } else {
+        text.append(QString::number(count, 'f', 2));
+    }
     text.append(" " + order);
 
     if (count > 1) {
@@ -72,31 +76,20 @@ QString makeDuration(int timeoutSeconds)
 {
     QString res = "";
 
-    int seconds = timeoutSeconds % 60;
-    int timeoutMinutes = timeoutSeconds / 60;
-    int minutes = timeoutMinutes % 60;
-    int timeoutHours = timeoutMinutes / 60;
-    int hours = timeoutHours % 24;
-    int days = timeoutHours / 24;
-    if (days > 0) {
-        res.append(makeDuration(days, "day"));
+    double seconds = timeoutSeconds;
+    double minutes = seconds / 60;
+    double hours = minutes / 60;
+    double days = hours  / 24;
+
+    if (days > 1) {
+        return makeDuration(days, "day");
+    } else if (hours > 1) {
+        return makeDuration(hours, "hour");
+    } else if (minutes > 1) {
+        return makeDuration(minutes, "minute");
+    } else {
+        return makeDuration(seconds, "second");
     }
-    if (hours > 0) {
-        if (!res.isEmpty() )
-            res.append(" ");
-        res.append(makeDuration(hours, "hour"));
-    }
-    if (minutes > 0) {
-        if (!res.isEmpty() )
-            res.append(" ");
-        res.append(makeDuration(minutes, "minute"));
-    }
-    if (seconds > 0) {
-        if (!res.endsWith(" "))
-            res.append(" ");
-        res.append(makeDuration(seconds, "second"));
-    }
-    return res;
 }
 
 }  // namespace
