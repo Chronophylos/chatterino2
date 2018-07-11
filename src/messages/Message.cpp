@@ -57,8 +57,9 @@ namespace {
 QString makeDuration(double count, const QString &order)
 {
     QString text;
+    double epsilon = 0.01;
 
-    if (fabs(count - qRound(count)) < 0.01) {
+    if (fabs(count - qRound(count)) < epsilon) { // |count - round(count)| < epsilon
         text.append(QString::number(qRound(count)));
     } else {
         text.append(QString::number(count, 'f', 2));
