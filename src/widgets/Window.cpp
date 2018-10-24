@@ -296,6 +296,28 @@ void Window::addShortcuts()
                          [this] { this->notebook_->selectIndex(7); });
     createWindowShortcut(this, "CTRL+9",
                          [this] { this->notebook_->selectIndex(8); });
+    createWindowShortcut(this, "CTRL+0",
+                         [this] { this->notebook_->selectIndex(9); });
+    createWindowShortcut(this, "CTRL+SHIFT+1",
+                         [this] { this->notebook_->selectIndex(10); });
+    createWindowShortcut(this, "CTRL+SHIFT+2",
+                         [this] { this->notebook_->selectIndex(11); });
+    createWindowShortcut(this, "CTRL+SHIFT+3",
+                         [this] { this->notebook_->selectIndex(12); });
+    createWindowShortcut(this, "CTRL+SHIFT+4",
+                         [this] { this->notebook_->selectIndex(13); });
+    createWindowShortcut(this, "CTRL+SHIFT+5",
+                         [this] { this->notebook_->selectIndex(14); });
+    createWindowShortcut(this, "CTRL+SHIFT+6",
+                         [this] { this->notebook_->selectIndex(15); });
+    createWindowShortcut(this, "CTRL+SHIFT+7",
+                         [this] { this->notebook_->selectIndex(16); });
+    createWindowShortcut(this, "CTRL+SHIFT+8",
+                         [this] { this->notebook_->selectIndex(17); });
+    createWindowShortcut(this, "CTRL+SHIFT+9",
+                         [this] { this->notebook_->selectIndex(18); });
+    createWindowShortcut(this, "CTRL+SHIFT+0",
+                         [this] { this->notebook_->selectIndex(19); });
 
     // Zoom in
     {
