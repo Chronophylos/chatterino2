@@ -51,6 +51,7 @@ public:
 
 private:
     TaggedString createUser(const QString &str);
+    bool isBlacklisted(const QString &str);
 
     std::set<TaggedString> items_;
     mutable std::mutex itemsMutex_;

@@ -55,6 +55,11 @@ CompletionModel::CompletionModel(Channel &channel)
 {
 }
 
+bool CompletionModel::isBlacklisted(const QString &str)
+{
+    return str.compare(QString("OMEGALIDL"), Qt::CaseInsensitive) == 0;
+}
+
 int CompletionModel::columnCount(const QModelIndex &) const
 {
     return 1;
@@ -85,7 +90,7 @@ void CompletionModel::refresh(const QString &prefix)
         return;
 
     auto addString = [&](const QString &str, TaggedString::Type type) {
-        if (str.startsWith(prefix, Qt::CaseInsensitive))
+        if (str.startsWith(prefix, Qt::CaseInsensitive) && !isBlacklisted(str))
             this->items_.emplace(str + " ", type);
     };
 
